@@ -22,6 +22,63 @@ A Retrieval-Augmented Generation (RAG) chatbot built with FastAPI and Azure Open
   - `azure-storage-blob` - Azure Blob Storage
   - `pypdf` - PDF processing
 
+## Architecture
+
+The system follows a modern cloud-native architecture with Azure services:
+
+```mermaid
+flowchart LR
+ subgraph UserLayer["User Layer"]
+        U["User\nBrowser / Mobile App"]
+  end
+ subgraph FE["Frontend (Azure Static Web Apps)"]
+        UI["React / Streamlit UI"]
+  end
+ subgraph BE["Backend API Azure App Service (FastAPI / Flask)"]
+        API["REST / WebSocket Endpoint / ask"]
+  end
+ subgraph AI["AI Services"]
+        AOAI["Azure OpenAI - GPT-4 Chat Completion - Embedding Model"]
+        ACS["Azure Cognitive Search Vector Index + Hybrid Search"]
+  end
+ subgraph Storage["Storage & Security"]
+        BLOB["Azure Blob Storage (PDFs, Data Chunks)"]
+        KV["Azure Key Vault API Keys, Secrets"]
+        INS["Application Insights Logs, Metrics, Traces"]
+  end
+ subgraph DevOps["DevOps Pipeline"]
+        GH["GitHub Repository"]
+        GA["GitHub Actions\nCI/CD Deployment"]
+  end
+    U -- HTTP(S) --> UI
+    UI -- Chat Request --> API
+    API -- "Embedding Request (text-embedding-3-small)" --> AOAI
+    API -- Semantic Search Vector Query --> ACS
+    ACS -- Retrieve Relevant Chunks --> API
+    API -- Chat Completion Request --> AOAI
+    API -- Formatted Answer --> UI
+    ACS -- Indexing Reads --> BLOB
+    API -- Get Secrets --> KV
+    API -- Telemetry --> INS
+    GH -- Push / PR --> GA
+    GA -- Deploy Frontend --> FE
+    GA -- Deploy Backend --> BE
+```
+
+### Architecture Components
+
+- **User Layer**: Web browsers and mobile applications
+- **Frontend**: Azure Static Web Apps hosting React/Streamlit UI
+- **Backend API**: FastAPI service deployed on Azure App Service
+- **AI Services**:
+  - Azure OpenAI for chat completions (GPT-5) and embeddings (text-embedding-3-small)
+  - Azure Cognitive Search for vector indexing and hybrid search
+- **Storage & Security**:
+  - Azure Blob Storage for document storage
+  - Azure Key Vault for secrets management
+  - Application Insights for monitoring and telemetry
+- **DevOps**: GitHub Actions for CI/CD pipeline
+
 ## Prerequisites
 
 - Python 3.8+
