@@ -26,7 +26,9 @@ A Retrieval-Augmented Generation (RAG) chatbot built with FastAPI and Azure Open
 
 The system follows a modern cloud-native architecture with Azure services.
 
-**Detailed Architecture Diagram:** See [RAG Chatbot.drawio](RAG%20Chatbot.drawio) for the complete draw.io diagram (open with [diagrams.net](https://app.diagrams.net/))
+![RAG Chatbot Architecture](architecture.png)
+
+**Detailed Architecture Diagram:** See [RAG Chatbot.drawio](RAG%20Chatbot.drawio) for the editable draw.io diagram (open with [diagrams.net](https://app.diagrams.net/))
 
 ### High-Level Flow
 
