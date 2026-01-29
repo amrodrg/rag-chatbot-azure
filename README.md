@@ -14,7 +14,7 @@ A Retrieval-Augmented Generation (RAG) chatbot built with FastAPI and Azure Open
 
 - **Framework:** FastAPI
 - **AI Service:** Azure OpenAI
-- **Python Libraries:** 
+- **Python Libraries:**
   - `openai` - Azure OpenAI SDK
   - `uvicorn` - ASGI server
   - `python-dotenv` - Environment variable management
@@ -32,25 +32,29 @@ A Retrieval-Augmented Generation (RAG) chatbot built with FastAPI and Azure Open
 ## Setup
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/amrodrg/rag-chatbot-azure.git
    cd rag-chatbot-azure
    ```
 
 2. **Create and activate conda environment**
+
    ```bash
    conda create -n rag_chatbot_azure python=3.10
    conda activate rag_chatbot_azure
    ```
 
 3. **Install dependencies**
+
    ```bash
    pip install -r requirements.txt
    ```
 
 4. **Configure environment variables**
-   
+
    Create a `.env` file in the project root:
+
    ```env
    AZURE_OPENAI_ENDPOINT=https://your-apim-endpoint.azure-api.net/your-path
    AZURE_OPENAI_API_KEY=your-apim-subscription-key
@@ -75,16 +79,19 @@ The API will be available at `http://127.0.0.1:8001`
 ## API Endpoints
 
 ### Health Check
+
 ```http
 GET /health
 ```
 
 ### Root
+
 ```http
 GET /
 ```
 
 ### Chat Completion
+
 ```http
 POST /chat
 Content-Type: application/json
@@ -102,6 +109,7 @@ Content-Type: application/json
 ```
 
 **Response:**
+
 ```json
 {
   "answer": "AI generated response"
@@ -109,6 +117,7 @@ Content-Type: application/json
 ```
 
 ### Text Embedding
+
 ```http
 POST /embed
 Content-Type: application/json
@@ -119,6 +128,7 @@ Content-Type: application/json
 ```
 
 **Response:**
+
 ```json
 {
   "embedding": [0.123, -0.456, ...],
@@ -129,6 +139,7 @@ Content-Type: application/json
 ## Interactive API Documentation
 
 Once the server is running, visit:
+
 - Swagger UI: `http://127.0.0.1:8001/docs`
 - ReDoc: `http://127.0.0.1:8001/redoc`
 
@@ -162,16 +173,6 @@ This project uses Azure API Management. The authentication requires the `Ocp-Api
 ### GPT-5 Model
 
 The GPT-5 model requires the `max_completion_tokens` parameter instead of `max_tokens`.
-
-## Security
-
-- ⚠️ Never commit `.env` files
-- ⚠️ Keep your APIM subscription keys secure
-- ⚠️ Use environment variables for all sensitive data
-
-## License
-
-MIT License
 
 ## Author
 
