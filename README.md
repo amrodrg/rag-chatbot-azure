@@ -30,47 +30,6 @@ The system follows a modern cloud-native architecture with Azure services.
 
 **Detailed Architecture Diagram:** See [RAG Chatbot.drawio](RAG%20Chatbot.drawio) for the editable draw.io diagram (open with [diagrams.net](https://app.diagrams.net/))
 
-### High-Level Flow
-
-```mermaid
-flowchart LR
- subgraph UserLayer["User Layer"]
-        U["User\nBrowser / Mobile App"]
-  end
- subgraph FE["Frontend (Azure Static Web Apps)"]
-        UI["React / Streamlit UI"]
-  end
- subgraph BE["Backend API Azure App Service (FastAPI / Flask)"]
-        API["REST / WebSocket Endpoint / ask"]
-  end
- subgraph AI["AI Services"]
-        AOAI["Azure OpenAI - GPT-4 Chat Completion - Embedding Model"]
-        ACS["Azure Cognitive Search Vector Index + Hybrid Search"]
-  end
- subgraph Storage["Storage & Security"]
-        BLOB["Azure Blob Storage (PDFs, Data Chunks)"]
-        KV["Azure Key Vault API Keys, Secrets"]
-        INS["Application Insights Logs, Metrics, Traces"]
-  end
- subgraph DevOps["DevOps Pipeline"]
-        GH["GitHub Repository"]
-        GA["GitHub Actions\nCI/CD Deployment"]
-  end
-    U -- HTTP(S) --> UI
-    UI -- Chat Request --> API
-    API -- "Embedding Request (text-embedding-3-small)" --> AOAI
-    API -- Semantic Search Vector Query --> ACS
-    ACS -- Retrieve Relevant Chunks --> API
-    API -- Chat Completion Request --> AOAI
-    API -- Formatted Answer --> UI
-    ACS -- Indexing Reads --> BLOB
-    API -- Get Secrets --> KV
-    API -- Telemetry --> INS
-    GH -- Push / PR --> GA
-    GA -- Deploy Frontend --> FE
-    GA -- Deploy Backend --> BE
-```
-
 ### Architecture Components
 
 - **User Layer**: Web browsers and mobile applications
