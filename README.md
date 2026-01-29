@@ -28,8 +28,6 @@ The system follows a modern cloud-native architecture with Azure services.
 
 ![RAG Chatbot Architecture](architecture.png)
 
-**Detailed Architecture Diagram:** See [RAG Chatbot.drawio](RAG%20Chatbot.drawio) for the editable draw.io diagram (open with [diagrams.net](https://app.diagrams.net/))
-
 ### Architecture Components
 
 - **User Layer**: Web browsers and mobile applications
